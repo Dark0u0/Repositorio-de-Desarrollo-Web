@@ -1,0 +1,52 @@
+body {
+  background-image: url('img/pastillas.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 10px rgba(30, 255, 0, 0.1);
+  padding: 0rem;
+  max-width: 100rem;
+  min-width: 0rem;
+  margin-top: 120px; /* baja el elemento */
+  height: 600px;
+}
+
+#btnLogin {
+  background-color: #DAAEEC;
+  border-radius: 50px;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-family: domine, serif;
+  font-size: 35px;
+  padding: 0px 150px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+.text-primary {
+    color: #000000 !important;
+    font-size: 80px;
+    font-family: domine, serif;
+    margin-top: 20px; /* baja el elemento */
+}
+
+.card-text {
+    font-size: 50px;
+    margin-top: -28px;
+    font-family: domine, serif;
+}
+
+.imagen-movil {
+  content: url('img/logo.png');
+  width: 150px; /* tamaño opcional */
+  height: 150px;
+}
