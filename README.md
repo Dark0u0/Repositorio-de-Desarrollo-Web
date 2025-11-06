@@ -1,2 +1,4 @@
-En este repositorio se encuentra el codigo del frontend, el cual se necuentra en desarrollo y aun no es apto para el publico, actualmete solo cuenta con la pagina principal donde esta planeado que te rediriga
-a otras opaginas, las cuales seran la de inicio de sesion y la de registro de nuevos usuarios, y ya tiene creada dos carpetas aparte de la de login las cuales seran las paginas que se mecionaron anmteriormente.
+develop
+Este es el aparatado de development, y aqui se estaran haciendo cambios en el codigo para no modificar el codigo ya testeado que esta en main, solo se subira a main cuando se compruebe que los cambios hechos
+compilan y no causan algun error al momento de correr la pagina
+Fecha: 06/11/2025
