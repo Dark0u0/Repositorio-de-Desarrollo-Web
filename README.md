@@ -1,0 +1,2 @@
+En este repositorio se encuentra el codigo del frontend, el cual se necuentra en desarrollo y aun no es apto para el publico, actualmete solo cuenta con la pagina principal donde esta planeado que te rediriga
+a otras opaginas, las cuales seran la de inicio de sesion y la de registro de nuevos usuarios, y ya tiene creada dos carpetas aparte de la de login las cuales seran las paginas que se mecionaron anmteriormente.
