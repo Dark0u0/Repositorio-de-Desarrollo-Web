@@ -14,7 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     await window.appNav.toHome();
   });
 
+  const btnRegi = document.getElementById('btnRegister');
+
+  btnRegi?.addEventListener('click', async () => {
+    console.log('Resgister clickeado');
+    await window.appNav.toRegister();
+  });
+
 });
+
 
 //function showAlert(message: string, type: 'success' | 'danger' = 'success') {
   //alert(message);// Aquí puedes personalizar la forma en que muestras las alertas

@@ -3,15 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>Kevin Joel Coleaza Dominguez</title>
+
   </head>
   <body>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="display-4 text-primary mb-4">Home Page 👈(⌒▽⌒)</h1>
-          <p class="lead">Bienvenido a Home Page</p>
-          <button id="btnHome" type="button" class="btn btn-primary">Return</button>
+   <!-- parte para la barra de navegacio de boostrap, canche me dijo como se llama--> 
+   <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="./img/logo.png" class="imagen-2">
+      <a class="navbar-brand">H.I.T</a>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnBackmainpg">
+    Regresar
+    </button>
+  </div>
+</nav>
+   <!-- lo que va en la pagina -->
+    <div class="container nt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow">
+            <div class="card-body text-center">
+              
+              <h1 class="card-title text-primary">Inicio de sesión</h1>
+              <p class="card-text">Bienvenido a tu aplicacion de confianza</p>
+              <div class="row spacer">
+                <div class="col">
+                  <label for="usr">Email:</label>
+                  <input type="email" class="form-control spacer" id="inputEmail" placeholder="name@example.com" required />
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password" required />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" id="btnCheckLogin">
+                Iniciar sesión
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

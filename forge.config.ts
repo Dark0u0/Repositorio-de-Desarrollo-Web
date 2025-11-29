@@ -43,7 +43,44 @@ const config: ForgeConfig = {
             name: 'home_window',
             preload: {
               js: './src/preload.ts',
-            },
+
+            },  
+          },
+      {
+            html: './src/pages/registro/regis.html',
+            js: './src/pages/registro/regis.ts',
+            name: 'registro_window',
+            preload: {
+              js: './src/preload.ts',
+
+            },  
+          },
+          {
+            html: './src/pages/principal/princi.html',
+            js: './src/pages/principal/princi.ts',
+            name: 'principal_window',
+            preload: {
+              js: './src/preload.ts',
+
+            },  
+          },
+          {
+            html: './src/pages/usuariocontrol/userad.html',
+            js: './src/pages/usuariocontrol/userad.ts',
+            name: 'admin_window',
+            preload: {
+              js: './src/preload.ts',
+
+            },  
+          },
+          {
+            html: './src/pages/editarusuario/edit.html',
+            js: './src/pages/editarusuario/edit.ts',
+            name: 'editar_window',
+            preload: {
+              js: './src/preload.ts',
+
+            },  
           },
         ],
       },

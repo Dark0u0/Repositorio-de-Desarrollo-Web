@@ -6,9 +6,14 @@ import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld('appNav', {
   toHome: () => ipcRenderer.invoke('nav:toHome'),
   toLogin: () => ipcRenderer.invoke('nav:toLogin'),
+  toRegister: () => ipcRenderer.invoke('nav:toRegister'),
+  toPrincipal: () => ipcRenderer.invoke('nav:toPrincipal'),
+  toAdmin: () => ipcRenderer.invoke('nav:toAdmin'),
+  toEditUser: (id: string | number) => ipcRenderer.invoke('nav:toEditUser', String(id)),
 });
 
 contextBridge.exposeInMainWorld('http', {
   get: (url: string, options?: any) => ipcRenderer.invoke('http:get', url, options),
   post: (url: string, body: any, options?: any) => ipcRenderer.invoke('http:post', url, body, options),
+  put: (url: string, body: any, options?: any) => ipcRenderer.invoke('http:post', url, body, options),
 });

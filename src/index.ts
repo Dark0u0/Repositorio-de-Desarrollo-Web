@@ -8,6 +8,18 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 declare const HOME_WINDOW_WEBPACK_ENTRY: string;
 declare const HOME_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
+declare const REGISTRO_WINDOW_WEBPACK_ENTRY: string; //En esta parte se declaran las contantes para la ventana de registro del ipcMain
+declare const REGISTRO_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
+declare const PRINCIPAL_WINDOW_WEBPACK_ENTRY: string;
+declare const PRINCIPAL_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
+declare const ADMIN_WINDOW_WEBPACK_ENTRY: string;
+declare const USERADMIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
+declare const EDITAR_WINDOW_WEBPACK_ENTRY: string;
+
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -59,6 +71,38 @@ ipcMain.handle('nav:toLogin', async () => {
 });
 
 
+ipcMain.handle('nav:toRegister', async () => {
+  if (!mainWindow) return;
+  // opcional: cambia preload si home lo requiere
+  // mainWindow.webContents.session.flushStorageData(); // si necesitas limpiar algo
+  await mainWindow.loadURL(REGISTRO_WINDOW_WEBPACK_ENTRY);
+  return true;
+});
+
+ipcMain.handle('nav:toPrincipal', async () => {
+  if (!mainWindow) return;
+  // opcional: cambia preload si home lo requiere
+  // mainWindow.webContents.session.flushStorageData(); // si necesitas limpiar algo
+  await mainWindow.loadURL(PRINCIPAL_WINDOW_WEBPACK_ENTRY);
+  return true;
+});
+
+ipcMain.handle('nav:toAdmin', async () => {
+  if (!mainWindow) return;
+  // opcional: cambia preload si home lo requiere
+  // mainWindow.webContents.session.flushStorageData(); // si necesitas limpiar algo
+  await mainWindow.loadURL(ADMIN_WINDOW_WEBPACK_ENTRY);
+  return true;
+});
+
+ipcMain.handle('nav:toEditUser', async (event, userId) => {
+  if (!mainWindow) return;
+  // opcional: cambia preload si home lo requiere
+  // mainWindow.webContents.session.flushStorageData(); // si necesitas limpiar algo
+  await mainWindow.loadURL(`${EDITAR_WINDOW_WEBPACK_ENTRY}?userId=${userId}`);
+  return true;
+});
+
 ipcMain.handle('http:get', async (_e, url: string, options?: any) => {
   const res = await net.fetch(url, { method: 'GET', ...options });
   const body = await res.json(); // o .text() / .arrayBuffer()
@@ -71,6 +115,17 @@ ipcMain.handle('http:post', async (_e, url: string, payload: any, options?: any)
   console.log('POST', url, payload, options);
   const res = await net.fetch(url, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(options?.headers || {}), },
+    body: JSON.stringify(payload),
+    ...options
+  });
+  return { status: res.status, ok: res.ok, body: await res.json() };
+});
+
+ipcMain.handle('http:put', async (_e, url: string, payload: any, options?: any) => {
+  console.log('PUT', url, payload, options);
+  const res = await net.fetch(url, {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json', ...(options?.headers || {}), },
     body: JSON.stringify(payload),
     ...options
