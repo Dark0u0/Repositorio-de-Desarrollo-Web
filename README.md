@@ -9,3 +9,9 @@ Rama: develop
 Fuero actualizados varios archivos y carpetas de lara actual, se puede encontra uncommit indicando "actualizacion de los archivos", estos son los archivos que fueron actualizados, y otros nuevos que fuero necesarios para esta actualizacion
 
 Fecha: 29/11/2025
+
+Rama: develop
+
+El dia de hoy se realizo el completado la funcionalidad del crud ademas de agregar una funcion sencilla de una alarma para la demostracion de la integradora, ademas de modificaciones sencillas en el css de algunos archivos.
+
+Fecha: 02/12/2025
