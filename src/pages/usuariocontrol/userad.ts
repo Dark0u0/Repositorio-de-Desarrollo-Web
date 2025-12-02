@@ -2,6 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import './userad.css';
 import '../../appTypes.ts';
+  
+  const btnLogi = document.getElementById('btnAdminuser');
+
+  btnLogi?.addEventListener('click', async () => {
+    console.log('Login clickeado');
+    await window.appNav.toPrincipal();
+  });
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,12 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (delBtn) {
                   const userId = delBtn.dataset.id;
-                  const state = 0
+                  const status = 0
                   //const usuario = allUsers.find(u => u.id === Number(userId));
-                  const res = await window.http.put(`http://localhost:3001/delete-user/${userId}`, {
-                    body: JSON.stringify({ state }),
-                    headers: { 'Content-Type': 'application/json' }
-                  });
+                  const res = await window.http.put(`http://localhost:3001/delete-user/${userId}`,
+                  { status },
+                  {
+                 headers: { 'Content-Type': 'application/json' }
+                  }
+                );
                   
                   // Verificar si la respuesta es válida
                   if (!res.ok) {

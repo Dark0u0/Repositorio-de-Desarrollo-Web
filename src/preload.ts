@@ -9,11 +9,11 @@ contextBridge.exposeInMainWorld('appNav', {
   toRegister: () => ipcRenderer.invoke('nav:toRegister'),
   toPrincipal: () => ipcRenderer.invoke('nav:toPrincipal'),
   toAdmin: () => ipcRenderer.invoke('nav:toAdmin'),
-  toEditUser: (id: string | number) => ipcRenderer.invoke('nav:toEditUser', String(id)),
+  toEditUser: (id: string) => ipcRenderer.invoke('nav:toEditUser', String(id)),
 });
 
 contextBridge.exposeInMainWorld('http', {
   get: (url: string, options?: any) => ipcRenderer.invoke('http:get', url, options),
   post: (url: string, body: any, options?: any) => ipcRenderer.invoke('http:post', url, body, options),
-  put: (url: string, body: any, options?: any) => ipcRenderer.invoke('http:post', url, body, options),
+  put: (url: string, body: any, options?: any) => ipcRenderer.invoke('http:put', url, body, options),
 });

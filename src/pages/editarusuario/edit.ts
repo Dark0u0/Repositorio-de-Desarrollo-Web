@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Obtener el ID del usuario desde los query parameters
+  const test = document.getElementById('test') as HTMLButtonElement;
   const params = new URLSearchParams(window.location.search);
   const userId = (params.get('userId'));
   const formContainer = document.getElementById('edit-form-container');
@@ -41,16 +42,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // Encontrar el usuario por ID
-      const usuario = allUsers.find(u => u.id === Number(userId));
+      const user = allUsers.find(u => u.id === Number(userId));
       
-      if (!usuario) {
+      if (!user) {
         if (formContainer) formContainer.innerText = 'Usuario no encontrado';
         return;
       }
 
       // Llenar el formulario con los datos del usuario
-      if (nameInput) nameInput.value = usuario.name;
-      if (emailInput) emailInput.value = usuario.email;
+      if (nameInput) nameInput.value = user.name;
+      if (emailInput) emailInput.value = user.email;
     } catch (error) {
       console.error('Error al cargar usuario:', error);
       if (formContainer) formContainer.innerText = 'Error al cargar los datos del usuario';
@@ -60,29 +61,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Guardar cambios
   guardarBtn?.addEventListener('click', async () => {
     try {
-        const nombre = nameInput?.value?.trim();
-        const correo = emailInput?.value?.trim();
+        const name = nameInput?.value?.trim();
+        const email = emailInput?.value?.trim();
 
-        if (!nombre || !correo) {
+        if (!name || !email) {
             alert('Por favor completa todos los campos');
             return;
         }
 
-        const res = await window.http.put(`http://localhost:3001/update-user/${userId}`, {
-            body: JSON.stringify({ nombre, correo }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+  const res = await window.http.put(`http://localhost:3001/update-user/${userId}`, 
+   { name, email },  // 👈 El body se envía directamente como string
+  {
+    headers: { 'Content-Type': 'application/json' }
+  }
+);
+3
+// leer respuesta JSON
+const updatedUser = await res.json();  // 👈 así obtienes el body real
 
-        // Verificar si la respuesta es válida
-        if (!res.ok) {
-            alert(`Error: ${res.body.error || 'No se pudo actualizar'}`);
-            return; // Salir si hay un error
-        }
+// Verificar si la respuesta es válida
+if (!res.ok) {
+  alert(`Error: ${updatedUser.error || 'No se pudo actualizar'}`);
+  return;
+}
 
-        alert('Usuario actualizado exitosamente');
-        await window.appNav.toAdmin();
+alert('Usuario actualizado exitosamente');
+await window.appNav.toAdmin();
     } catch (error) {
-        console.error('Error al guardar:', error);
+        console.error('Error al guardar usuario:', error);
         alert('Error al guardar los cambios');
     }
   });

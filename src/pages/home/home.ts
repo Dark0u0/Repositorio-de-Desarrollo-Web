@@ -35,8 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
   await window.appNav.toPrincipal();
 }
 
-      }
+    }
     );
+
+
+
         // Navegar a la ventana principal (home)
         // window.appNav.toHome();
 
