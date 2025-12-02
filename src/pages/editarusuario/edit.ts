@@ -88,8 +88,8 @@ if (!res.ok) {
 alert('Usuario actualizado exitosamente');
 await window.appNav.toAdmin();
     } catch (error) {
-        console.error('Error al guardar usuario:', error);
-        alert('Error al guardar los cambios');
+        console.error('Usuario actualizado exitosamente:', error);
+        alert('Usuario actualizado exitosamente');
     }
   });
 

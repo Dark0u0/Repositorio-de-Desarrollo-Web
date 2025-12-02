@@ -37,3 +37,48 @@
   margin-top: 5%; /* baja el elemento */
   height: 100%;
 }
+
+.container {
+  margin-top: 40px;
+}
+
+.card {
+  background: var(--card-light);
+  border-radius: 12px;
+  border: 2px solid var(--blue-main);
+  padding: 20px;
+  width: 100%;
+}
+
+.card-title {
+  color: var(--blue-main);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.card-text {
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: bold;
+  color: var(--text-dark);
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+}
+
+input.form-control {
+  border-radius: 8px;
+  border: 2px solid var(--blue-soft);
+  padding: 8px;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+
+
+.btn-primary:hover {
+  opacity: 0.85;
+}

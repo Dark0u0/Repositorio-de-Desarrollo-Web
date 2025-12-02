@@ -26,5 +26,16 @@
     </button>
   </div>
 </nav>
-Proxima funcionalidad: alarma
+ <h2>Set an Alarm</h2>
+
+  <label>Tiempo de la alrma (segundos):</label>
+  <input type="number" id="alarmInput" min="1" value="5"/>
+  <button id="startAlarm">Iniciar alarma</button>
+  <button id="stopAlarm" class="btn danger">Detener alarma</button>
+
+  <p id="alertMsg"></p>
+
+  <div id="alarmBox"></div>
+
+  <script type="module" src="app.js"></script>
   </body>
