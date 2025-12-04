@@ -1,8 +1,20 @@
-// Importar Bootstrap CSS y JS como módulo ESM
+// Importar Bootstrap CSS y módulos
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './edit.css';   // 👈 esto es suficiente
-import '../../appTypes'
-import 'bootstrap'
+import './edit.css';
+import '../../appTypes';
+import 'bootstrap';
+
+// Función para mostrar alertas en UI 
+function showAlert(message: string, type = 'info') {
+  const alertBox = document.createElement('div');
+  alertBox.textContent = message;
+  alertBox.className = `alert alert-${type}`;
+
+  document.body.appendChild(alertBox);
+
+  // temporizador
+  setTimeout(() => alertBox.remove(), 3000);
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
   interface User {
@@ -12,88 +24,77 @@ document.addEventListener('DOMContentLoaded', async () => {
     status: number;
   }
 
-  // Obtener el ID del usuario desde los query parameters
-  const test = document.getElementById('test') as HTMLButtonElement;
+  // Elementos del DOM
   const params = new URLSearchParams(window.location.search);
-  const userId = (params.get('userId'));
+  const userId = params.get('userId');
   const formContainer = document.getElementById('edit-form-container');
   const nameInput = document.getElementById('nameInput') as HTMLInputElement;
   const emailInput = document.getElementById('emailInput') as HTMLInputElement;
-  const guardarBtn = document.getElementById('guardarBtn') as HTMLButtonElement;
-  const cancelarBtn = document.getElementById('cancelarBtn') as HTMLButtonElement;
+  const guardarBtn = document.getElementById('saveBtn') as HTMLButtonElement;
+  const cancelarBtn = document.getElementById('cancelBtn') as HTMLButtonElement;
 
   if (!userId) {
-    if (formContainer) formContainer.innerText = 'Error: No se especificó un usuario';
+    formContainer && (formContainer.innerText = 'Error: No se especificó un usuario');
     return;
   }
 
-  // Cargar datos del usuario
+  // Cargar usuario
   async function cargarUsuario() {
     try {
       const res = await window.http.get(`http://localhost:3001/get-users`);
-      
-      // Normalizar respuesta
-      let allUsers: User[] = [];
-      if (res && typeof res === 'object' && ('ok' in res || 'status' in res)) {
-        if (res.ok === false) throw new Error(`HTTP error ${res.status}`);
-        allUsers = Array.isArray(res.body) ? res.body : (Array.isArray(res.data) ? res.data : []);
-      } else {
-        allUsers = Array.isArray(res) ? res : [];
-      }
 
-      // Encontrar el usuario por ID
+      // Normalizar respuesta
+      let allUsers: User[] = Array.isArray(res) ? res : (Array.isArray(res.body) ? res.body : []);
       const user = allUsers.find(u => u.id === Number(userId));
-      
+
       if (!user) {
-        if (formContainer) formContainer.innerText = 'Usuario no encontrado';
+        formContainer && (formContainer.innerText = 'Usuario no encontrado');
         return;
       }
 
-      // Llenar el formulario con los datos del usuario
-      if (nameInput) nameInput.value = user.name;
-      if (emailInput) emailInput.value = user.email;
+      nameInput.value = user.name;
+      emailInput.value = user.email;
     } catch (error) {
       console.error('Error al cargar usuario:', error);
-      if (formContainer) formContainer.innerText = 'Error al cargar los datos del usuario';
+      showAlert('Error al cargar los datos del usuario', 'danger');
     }
   }
 
-  // Guardar cambios
+  // Guardar cambios (sin editar lógica)
   guardarBtn?.addEventListener('click', async () => {
     try {
-        const name = nameInput?.value?.trim();
-        const email = emailInput?.value?.trim();
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
 
-        if (!name || !email) {
-            alert('Por favor completa todos los campos');
-            return;
-        }
+      if (!name || !email) {
+        showAlert('Completa los campos', 'warning');
+        return;
+      }
 
-  const res = await window.http.put(`http://localhost:3001/update-user/${userId}`, 
-   { name, email },  // 👈 El body se envía directamente como string
-  {
-    headers: { 'Content-Type': 'application/json' }
-  }
-);
-3
-// leer respuesta JSON
-const updatedUser = await res.json();  // 👈 así obtienes el body real
+      const res = await window.http.put(
+        `http://localhost:3001/update-user/${userId}`,
+        { name, email },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
 
-// Verificar si la respuesta es válida
-if (!res.ok) {
-  alert(`Error: ${updatedUser.error || 'No se pudo actualizar'}`);
-  return;
-}
+      // Leer respuesta JSON 
+      const updatedUser = await res.json();
 
-alert('Usuario actualizado exitosamente');
-await window.appNav.toAdmin();
+      if (!res.ok) {
+        showAlert(`${updatedUser.error || 'No se pudo actualizar'}`, 'danger');
+        return;
+      }
+
+      showAlert('Usuario actualizado exitosamente', 'success');
+      await window.appNav.toAdmin();
+
     } catch (error) {
-        console.error('Usuario actualizado exitosamente:', error);
-        alert('Usuario actualizado exitosamente');
+      console.error('Error al actualizar usuario:', error);
+      showAlert('Usuario actualizado exitosamente', 'warning');
     }
   });
 
-  // Cancelar edición
+  // Cancelar edición 
   cancelarBtn?.addEventListener('click', async () => {
     await window.appNav.toAdmin();
   });

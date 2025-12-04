@@ -8,6 +8,12 @@ body {
   margin: 0;
 }
 
+.btnBackmainpg {
+  color: rgb(0, 0, 0);
+  background: #f6080830;
+  cursor: pointer;
+}
+
 .card {
   width: 420px;
   background: white;
@@ -35,13 +41,26 @@ body {
   color: #000000;
 }
 
-.btn {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #00BFFF;
+#btnAdminuser {
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+
+#btnBackmainpg {
+  background-color: red;
   color: white;
-  font-size: 15px;
+}
+
+.editarBtn {
+  color: rgb(0, 0, 0);
+  background: #08f2f630;
   cursor: pointer;
 }
+
+.eliminarBtn {
+  color: rgb(0, 0, 0);
+  background: #f6080830;
+  cursor: pointer;
+}
+

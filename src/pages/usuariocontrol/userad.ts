@@ -10,6 +10,13 @@ import '../../appTypes.ts';
     await window.appNav.toPrincipal();
   });
 
+  const btnback = document.getElementById('btnBackmainpg');
+
+  btnback?.addEventListener('click', async () => {
+    console.log('Login clickeado');
+    await window.appNav.toLogin();
+  });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   interface User {
@@ -52,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="user-name">${escapeHtml(u.name)}</div>
                   <div class="user-email">${escapeHtml(u.email)}</div>
                   <div class="user-actions">
-                    <button class="editBtn" data-id="${u.id}">Editar</button>
-                    <button class="deleteBtn" data-id="${u.id}">Eliminar</button>
+                    <button class="editarBtn" data-id="${u.id}">Actualizar</button>
+                    <button class="eliminarBtn" data-id="${u.id}">Eliminar</button>
                   </div>
                 `;
                 list.appendChild(item);
@@ -62,17 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
               // listener delegado: manejar botones Editar/Eliminar
               (document.getElementById('user-list') as HTMLElement | null)?.addEventListener('click', async (ev) => {
                 const target = ev.target as HTMLElement;
-                const editBtn = target.closest('.editBtn') as HTMLButtonElement | null;
-                const delBtn = target.closest('.deleteBtn') as HTMLButtonElement | null;
+                const actuBtn = target.closest('.editarBtn') as HTMLButtonElement | null;
+                const borrarBtn = target.closest('.eliminarBtn') as HTMLButtonElement | null;
 
-                if (editBtn) {
-                  const id = editBtn.dataset.id;
-                  console.log('Editar usuario id=', id);
+                if (actuBtn) {
+                  const id = actuBtn.dataset.id;
+                  console.log('Actualizar usuario id=', id);
                   await window.appNav.toEditUser(id);
                 }
 
-                if (delBtn) {
-                  const userId = delBtn.dataset.id;
+                if (borrarBtn) {
+                  const userId = borrarBtn.dataset.id;
                   const status = 0
                   //const usuario = allUsers.find(u => u.id === Number(userId));
                   const res = await window.http.put(`http://localhost:3001/delete-user/${userId}`,
